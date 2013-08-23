@@ -19,12 +19,12 @@ curl --silent --location http://heroku-jvm-common.s3.amazonaws.com/jvm-buildpack
 #create the cache dir if it doesn't exist
 mkdir -p $CACHE_DIR
 
-# create default system.properties 
+# create default system.properties
 if [ ! -f ${BUILD_DIR}/system.properties ]; then
   echo "java.runtime.version=1.6" > ${BUILD_DIR}/system.properties
 fi
 
-# install JDK 
+# install JDK
 javaVersion=$(detect_java_version ${BUILD_DIR})
 echo -n "-----> Installing OpenJDK ${javaVersion}..."
 install_java ${BUILD_DIR} ${javaVersion}
@@ -65,7 +65,7 @@ if ! has_supported_sbt_version ${BUILD_DIR}; then
 	echo " !      You must use a release verison of sbt, sbt.version=0.11.0 or greater"
 	exit 1
 fi
- 
+
 SBT_VERSION="$(get_supported_sbt_version ${BUILD_DIR})"
 SBT_JAR="sbt-launch-0.11.3-2.jar"
 SBT_PROPS="sbt-$SBT_VERSION.boot.properties"
@@ -138,8 +138,8 @@ for DIR in $CACHED_DIRS ; do
 done
 
 # drop ivy cache from slug for play only
-if is_play $BUILD_DIR && [ -d $SBT_USER_HOME/.ivy2 ] ; then
-  echo "-----> Dropping ivy cache from the slug" 
-  rm -rf $SBT_USER_HOME/.ivy2 
-fi
-
+# if is_play $BUILD_DIR && [ -d $SBT_USER_HOME/.ivy2 ] ; then
+# Actually, fuck that. Drop the Ivy Cache from Scalatra, it's HUGE.
+echo "-----> Dropping ivy cache from the slug"
+rm -rf $SBT_USER_HOME/.ivy2
+#fi
