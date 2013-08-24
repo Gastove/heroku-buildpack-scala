@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+0;95;c#!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
 # fail fast
@@ -138,8 +138,8 @@ for DIR in $CACHED_DIRS ; do
 done
 
 # drop ivy cache from slug for play only
-# if is_play $BUILD_DIR && [ -d $SBT_USER_HOME/.ivy2 ] ; then
+if is_play $BUILD_DIR && [ -d $SBT_USER_HOME/.ivy2 ] ; then
 # Actually, fuck that. Drop the Ivy Cache from Scalatra, it's HUGE.
 echo "-----> Dropping ivy cache from the slug"
 rm -rf $SBT_USER_HOME/.ivy2
-#fi
+fi
