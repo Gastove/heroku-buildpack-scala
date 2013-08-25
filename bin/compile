@@ -138,8 +138,8 @@ for DIR in $CACHED_DIRS ; do
 done
 
 # drop ivy cache from slug for play only
-if is_play $BUILD_DIR && [ -d $SBT_USER_HOME/.ivy2 ] ; then
-# Actually, fuck that. Drop the Ivy Cache from Scalatra, it's HUGE.
-  echo "-----> Dropping ivy cache from the slug"
-  rm -rf $SBT_USER_HOME/.ivy2
-fi
+#if is_play $BUILD_DIR && [ -d $SBT_USER_HOME/.ivy2 ] ; then
+# Hrm. This isn't working correctly. Experiment.
+echo "-----> Dropping ivy cache from the slug"
+rm -rf $SBT_USER_HOME/.ivy2
+#fi
